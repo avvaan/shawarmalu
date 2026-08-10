@@ -40,7 +40,7 @@ export default function Reviews({ lang }: { lang: Lang }) {
                 </blockquote>
                 <figcaption
                   className={`mt-6 flex items-center gap-2.5 label ${
-                    onPaper ? "text-coal/55" : "text-bone/45"
+                    onPaper ? "text-coal/62" : "text-bone/60"
                   }`}
                 >
                   <span className={onPaper ? "text-coal" : "text-ember"}>

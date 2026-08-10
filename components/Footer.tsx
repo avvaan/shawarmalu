@@ -71,7 +71,7 @@ export default function Footer({ lang }: { lang: Lang }) {
         </svg>
       </div>
 
-      <div className="rail flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-bone/14 py-6 text-[0.8125rem] text-bone/45">
+      <div className="rail flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-bone/14 py-6 text-[0.8125rem] text-bone/60">
         <p>
           © {new Date().getFullYear()} {shop.name}. {ui.footer.rights[lang]}.
         </p>

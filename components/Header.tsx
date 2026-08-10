@@ -79,7 +79,7 @@ export default function Header({ lang }: { lang: Lang }) {
 
           <div className="flex items-center gap-4 md:gap-6">
             <div
-              className="label hidden items-center gap-1.5 text-bone/45 sm:flex"
+              className="label hidden items-center gap-1.5 text-bone/60 sm:flex"
               aria-label={ui.footer.langLabel[lang]}
             >
               <span aria-current="true" className="text-bone">

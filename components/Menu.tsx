@@ -54,7 +54,7 @@ export default function Menu({ lang }: { lang: Lang }) {
             })}
           </div>
 
-          <p className="label tnum text-coal/45" aria-live="polite">
+          <p className="label tnum text-coal/62" aria-live="polite">
             {shown.length} {ui.menu.count[lang]}
           </p>
         </div>

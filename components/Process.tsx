@@ -71,7 +71,7 @@ export default function Process({ lang }: { lang: Lang }) {
         <h2 className="text-[length:var(--text-h1)] font-extrabold uppercase">
           {ui.process.heading[lang]}
         </h2>
-        <p className="label hidden shrink-0 pb-2 text-bone/40 md:block">
+        <p className="label hidden shrink-0 pb-2 text-bone/60 md:block">
           {ui.process.hint[lang]}
         </p>
       </div>

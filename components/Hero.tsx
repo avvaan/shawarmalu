@@ -118,7 +118,7 @@ export default function Hero({ lang }: { lang: Lang }) {
         className="absolute right-[var(--rail)] bottom-[38%] z-10 hidden flex-col items-center gap-4 md:flex"
       >
         <span
-          className="label text-bone/45"
+          className="label text-bone/60"
           style={{ writingMode: "vertical-rl" }}
         >
           {ui.hero.scroll[lang]}

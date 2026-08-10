@@ -83,7 +83,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
 
             <Reveal className="mt-10 flex flex-col" stagger={0.08} y={20}>
               <div className="border-t border-bone/14 py-6">
-                <h3 className="label text-bone/40">{ui.find.address[lang]}</h3>
+                <h3 className="label text-bone/60">{ui.find.address[lang]}</h3>
                 <address className="mt-3 text-[1.125rem] leading-[1.45] not-italic">
                   {shop.street}
                   <br />
@@ -92,7 +92,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
               </div>
 
               <div className="border-t border-bone/14 py-6">
-                <h3 className="label text-bone/40">{ui.find.hours[lang]}</h3>
+                <h3 className="label text-bone/60">{ui.find.hours[lang]}</h3>
                 <dl className="mt-3 flex flex-col gap-2">
                   {ui.hoursRows[lang].map((row) => {
                     const isToday = !!now && row.index.includes(now.day);
@@ -103,14 +103,18 @@ export default function FindUs({ lang }: { lang: Lang }) {
                           isToday ? "text-bone" : "text-bone/60"
                         }`}
                       >
-                        <dt className="shrink-0">{row.days}</dt>
-                        <span aria-hidden className="leader" />
-                        <dd className="tnum shrink-0">{row.time}</dd>
-                        {isToday && (
-                          <span className="label shrink-0 text-ember">
-                            {ui.find.today[lang]}
-                          </span>
-                        )}
+                        <dt className="flex flex-1 items-baseline gap-3">
+                          <span className="shrink-0">{row.days}</span>
+                          <span aria-hidden className="leader" />
+                        </dt>
+                        <dd className="tnum flex shrink-0 items-baseline gap-3">
+                          {row.time}
+                          {isToday && (
+                            <span className="label text-ember">
+                              {ui.find.today[lang]}
+                            </span>
+                          )}
+                        </dd>
                       </div>
                     );
                   })}
@@ -118,7 +122,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
               </div>
 
               <div className="border-t border-bone/14 py-6">
-                <h3 className="label text-bone/40">{ui.find.phone[lang]}</h3>
+                <h3 className="label text-bone/60">{ui.find.phone[lang]}</h3>
                 <a
                   href={`tel:${shop.phone}`}
                   className="tnum mt-3 inline-block text-[1.125rem] transition-colors duration-300 hover:text-ember"
@@ -128,7 +132,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
               </div>
 
               <div className="border-y border-bone/14 py-6">
-                <h3 className="label text-bone/40">{ui.find.delivery[lang]}</h3>
+                <h3 className="label text-bone/60">{ui.find.delivery[lang]}</h3>
                 <p className="measure mt-3 leading-[1.55] text-bone/72">
                   {ui.find.deliveryBody[lang]}
                 </p>
