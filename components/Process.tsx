@@ -76,7 +76,7 @@ export default function Process({ lang }: { lang: Lang }) {
         </p>
       </div>
 
-      <div className="snap-x snap-mandatory overflow-x-auto pb-[clamp(3rem,7vh,5rem)] md:overflow-visible md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+      <div className="snap-x snap-mandatory overflow-x-auto pb-[clamp(3rem,7vh,5rem)] motion-safe:md:overflow-visible md:pb-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
         <div
           ref={track}
           className="flex w-max gap-4 px-[var(--rail)] md:gap-8"

@@ -145,7 +145,7 @@ export default function Header({ lang }: { lang: Lang }) {
               </button>
             </div>
 
-            <nav className="rail flex flex-1 flex-col justify-center gap-1">
+            <nav className="rail flex flex-1 flex-col justify-center gap-5">
               {sections.map((section, index) => (
                 <motion.a
                   key={section.href}
@@ -158,7 +158,7 @@ export default function Header({ lang }: { lang: Lang }) {
                     duration: 0.7,
                     ease: [0.16, 1, 0.3, 1],
                   }}
-                  className="font-display text-[13vw] font-extrabold uppercase leading-[1.05] tracking-[-0.04em]"
+                  className="font-display text-[10.5vw] font-extrabold uppercase leading-[0.95] tracking-[-0.04em]"
                 >
                   {ui.nav[section.key][lang]}
                 </motion.a>
