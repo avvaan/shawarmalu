@@ -1,0 +1,289 @@
+@import "tailwindcss";
+
+/* ------------------------------------------------------------------
+   Shawarma Lu — three colours, two faces, nothing else.
+   coal  #0C0B0A  warm charcoal, never screen-black
+   bone  #E9E0D2  greaseproof paper
+   ember #E4531B  the heat. Ink and light, never a glow.
+   ------------------------------------------------------------------ */
+
+@theme {
+  --color-coal: #0c0b0a;
+  --color-bone: #e9e0d2;
+  --color-ember: #e4531b;
+
+  --font-display: var(--font-geologica), "Helvetica Neue", Arial, sans-serif;
+  --font-sans: var(--font-golos), system-ui, -apple-system, sans-serif;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --text-mega: clamp(3.2rem, 13.2vw, 15rem);
+  --text-h1: clamp(2.6rem, 7.4vw, 6.5rem);
+  --text-h2: clamp(2rem, 4.4vw, 3.6rem);
+  --text-h3: clamp(1.35rem, 2.1vw, 1.9rem);
+  --text-num: clamp(3.4rem, 9vw, 8rem);
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --rail: clamp(1.25rem, 5vw, 6rem);
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    scrollbar-color: color-mix(in oklab, var(--color-bone) 22%, transparent)
+      transparent;
+    scrollbar-width: thin;
+  }
+
+  body {
+    background-color: var(--color-coal);
+    color: var(--color-bone);
+    font-family: var(--font-sans);
+    font-synthesis-weight: none;
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-ember);
+    color: var(--color-coal);
+  }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-coal);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--color-bone) 20%, transparent);
+    border: 3px solid var(--color-coal);
+    border-radius: 99px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-ember);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ember);
+    outline-offset: 3px;
+  }
+
+  /* the bone sheet inverts the ground — focus has to follow it */
+  .on-paper :focus-visible {
+    outline-color: var(--color-coal);
+  }
+  .on-paper ::selection {
+    background: var(--color-coal);
+    color: var(--color-bone);
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.03em;
+    line-height: 0.9;
+  }
+
+  input,
+  button,
+  a {
+    font: inherit;
+    color: inherit;
+  }
+
+  /* numerals in prices and counters must not dance */
+  .tnum {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+}
+
+/* ---------- materials ------------------------------------------------ */
+
+/* soot: fine charcoal grain over the dark ground */
+@utility soot {
+  position: relative;
+}
+@utility soot-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='0.42'/%3E%3C/svg%3E");
+}
+
+/* paper: the bone sheet — greaseproof fibre, warm and slightly uneven */
+@utility paper {
+  background-color: var(--color-bone);
+  color: var(--color-coal);
+  background-image:
+    radial-gradient(
+      120% 90% at 12% 0%,
+      rgba(12, 11, 10, 0.07) 0%,
+      transparent 60%
+    ),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='p'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.6' numOctaves='4'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23p)' opacity='0.16'/%3E%3C/svg%3E");
+}
+
+/* ---------- typographic roles --------------------------------------- */
+
+@utility label {
+  font-family: var(--font-sans);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+@utility rail {
+  padding-inline: var(--rail);
+}
+
+@utility measure {
+  max-width: 62ch;
+}
+
+/* dotted leader between a dish and its price — the market price board */
+@utility leader {
+  flex: 1 1 auto;
+  height: 1px;
+  align-self: flex-end;
+  margin-bottom: 0.42em;
+  background-image: radial-gradient(
+    circle,
+    currentColor 0.9px,
+    transparent 1px
+  );
+  background-size: 6px 2px;
+  background-repeat: repeat-x;
+  opacity: 0.34;
+}
+
+/* ---------- motion primitives --------------------------------------- */
+
+/* Content is visible by default. JS removes .lift-armed only where it
+   armed it, so no-JS and reduced-motion never hide anything. */
+.lift-armed {
+  opacity: 0;
+  transform: translateY(1.75rem);
+}
+
+.marquee-track {
+  animation: marquee var(--marquee-duration, 34s) linear infinite;
+}
+.marquee-rev .marquee-track {
+  animation-direction: reverse;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* hero wordmark: pure CSS so it plays with JS off and collapses to
+   its final frame under reduced-motion */
+.char-mask {
+  display: inline-block;
+  overflow: hidden;
+  vertical-align: bottom;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+.char {
+  display: inline-block;
+  animation: char-in 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes char-in {
+  from {
+    transform: translateY(105%) rotate(4deg);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) rotate(0);
+    opacity: 1;
+  }
+}
+
+.cue-run {
+  animation: cue-run 2.4s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+}
+@keyframes cue-run {
+  0% {
+    transform: translateY(-100%);
+  }
+  55%,
+  100% {
+    transform: translateY(340%);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.85;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    transform: scale(3.4);
+    opacity: 0;
+  }
+}
+
+/* ---------- the map wears the palette too ---------------------------- */
+
+.leaflet-container {
+  background: var(--color-coal) !important;
+  font-family: var(--font-sans);
+}
+.leaflet-tile-pane {
+  filter: grayscale(0.5) brightness(0.82) contrast(1.06) sepia(0.16);
+}
+.leaflet-control-attribution {
+  background: color-mix(in oklab, var(--color-coal) 82%, transparent) !important;
+  color: color-mix(in oklab, var(--color-bone) 50%, transparent) !important;
+  font-size: 10px;
+  letter-spacing: 0.02em;
+}
+.leaflet-control-attribution a {
+  color: color-mix(in oklab, var(--color-bone) 72%, transparent) !important;
+}
+.leaflet-bar a {
+  background: var(--color-coal) !important;
+  color: var(--color-bone) !important;
+  border-color: color-mix(in oklab, var(--color-bone) 16%, transparent) !important;
+}
+.leaflet-bar a:hover {
+  background: var(--color-ember) !important;
+  color: var(--color-coal) !important;
+}
+
+/* hidden until the pointer proves itself fine and JS has mounted */
+html.cursor-live,
+html.cursor-live * {
+  cursor: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .lift-armed {
+    opacity: 1;
+    transform: none;
+  }
+}
