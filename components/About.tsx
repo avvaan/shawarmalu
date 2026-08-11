@@ -54,7 +54,7 @@ export default function About({ lang }: { lang: Lang }) {
           className="relative aspect-4/3 w-full overflow-hidden bg-coal sm:aspect-16/9 lg:aspect-21/9"
         >
           <Image
-            src="/media/counter.png"
+            src="/media/counter.webp"
             alt={ui.about.imageAlt[lang]}
             fill
             loading="lazy"

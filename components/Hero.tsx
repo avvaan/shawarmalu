@@ -19,7 +19,7 @@ export default function Hero({ lang }: { lang: Lang }) {
       {/* The still is the LCP and the video's own poster: it stays under the
           video so a blocked or slow file never leaves a black screen. */}
       <Image
-        src="/media/hero-spit.png"
+        src="/media/hero-spit.webp"
         alt={ui.hero.videoAlt[lang]}
         fill
         preload
