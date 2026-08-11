@@ -52,9 +52,9 @@ export async function generateMetadata({
       locale: lang === "ru" ? "ru_RU" : "en_US",
       images: [
         {
-          url: "/media/hero-spit.png",
-          width: 2752,
-          height: 1536,
+          url: "/og.jpg",
+          width: 1200,
+          height: 630,
           alt: ui.hero.videoAlt[lang],
         },
       ],
@@ -63,7 +63,7 @@ export async function generateMetadata({
       card: "summary_large_image",
       title,
       description,
-      images: ["/media/hero-spit.png"],
+      images: ["/og.jpg"],
     },
     icons: { icon: "/favicon.ico" },
   };
@@ -76,7 +76,7 @@ function restaurantSchema(lang: "ru" | "en") {
     name: shop.name,
     description: ui.meta.description[lang],
     url: `${shop.url}/${lang}`,
-    image: `${shop.url}/media/hero-spit.png`,
+    image: `${shop.url}/og.jpg`,
     telephone: shop.phone,
     priceRange: shop.priceRange,
     servesCuisine: lang === "ru" ? ["Ближневосточная", "Шаурма"] : ["Middle Eastern", "Shawarma"],

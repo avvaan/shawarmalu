@@ -10,9 +10,16 @@ Tailwind v4, GSAP/ScrollTrigger, Framer Motion, Lenis. Бэкенда нет.
 
 ```bash
 npm install
-node scripts/fetch-media.mjs   # положит настоящие кадры в public/media
 npm run dev                    # http://localhost:3000 → /ru
 ```
+
+Медиа лежит в `public/media` и уже в репозитории. Восстановить папку с нуля —
+`node scripts/fetch-media.mjs` (заберёт PNG с CDN Higgsfield), затем
+`node scripts/optimize-media.mjs` (сожмёт в WebP и соберёт `public/og.jpg`).
+
+Если правите файлы в `public/media`, чистите кэш оптимизатора:
+`rm -rf .next/dev/cache/images` и перезапускайте dev-сервер — иначе он будет
+отдавать старые версии по тем же путям.
 
 ## Как устроено
 
@@ -56,8 +63,11 @@ scripts/fetch-media.mjs забирает медиа из Higgsfield в public/me
 
 - Герой: `next/image` с `preload` — это LCP. Видео лежит поверх и проявляется
   по `canplay`, на телефоне не монтируется вовсе.
-- Картинки — AVIF/WebP через `next/image`, `quality` 70.
+- Исходники — WebP, на выдаче `next/image` отдаёт AVIF/WebP, `quality` 70.
 - Leaflet и тайлы карты грузятся только когда секция подходит к вьюпорту.
+
+Lighthouse на продакшен-сборке (desktop): performance 99, accessibility 100,
+best practices 100, SEO 100. LCP 0.5 с, CLS 0.
 
 ## Деплой
 

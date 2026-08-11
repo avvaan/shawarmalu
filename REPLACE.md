@@ -18,30 +18,22 @@
 | Соцсети | instagram.com/shawarmalu, tiktok.com/@shawarmalu | `shop.socials` |
 | Домен | https://shawarmalu.vercel.app | `shop.url` — влияет на canonical, OG и schema.org |
 
-## Медиа (`public/media/`)
+## Медиа (`public/media/`) — на месте, заменять не нужно
 
-Сейчас там лежат **временные заглушки** — гладкие тёмные градиенты нужных
-пропорций. Настоящие кадры сгенерированы в Higgsfield; забрать их:
-
-```bash
-node scripts/fetch-media.mjs
-```
-
-Скрипту нужен доступ к `d8j0ntlcm91z4.cloudfront.net`. Если хост закрыт
-сетевой политикой — скачайте файлы вручную в эти пути:
+Все кадры загружены, сжаты в WebP и подключены. Исходные PNG из Higgsfield
+весили 106.6 МБ, после конвертации — 4.8 МБ, разницы на глаз нет.
 
 ```
-public/media/hero-spit.png        общий кадр вертела, 16:9   (постер героя + LCP)
-public/media/hero-spit.mp4        вертел крутится, 5 сек, без звука
-public/media/slicing.png          нож срезает мясо, 16:9     (постер кадра 02)
-public/media/slicing.mp4          нож срезает мясо, 5 сек, без звука
-public/media/counter.png          прилавок вечером, 3:2
-public/media/menu/*.png           8 позиций меню, 4:5
-public/media/process/*.png        4 кадра процесса, 3:2
+14 изображений   4.8 МБ   WebP q82
+2 видео         17.0 МБ   MP4, без звука
+og.jpg            60 КБ   карточка 1200×630 для Open Graph
 ```
 
-Видео сейчас отсутствуют вовсе — это не ломает страницу: герой показывает
-`hero-spit.png`, кадр процесса 02 — свой постер.
+Восстановить папку с нуля: `node scripts/fetch-media.mjs` (заберёт PNG),
+затем `node scripts/optimize-media.mjs` (сожмёт и соберёт `og.jpg`).
+
+Единственное, что осталось тяжёлым, — два MP4. Здесь их пережать нечем
+(нет ffmpeg); если понадобится, `-crf 30` уронит их примерно вчетверо.
 
 ## Что ещё стоит проверить
 
