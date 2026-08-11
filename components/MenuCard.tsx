@@ -5,15 +5,13 @@ import { useRef } from "react";
 import gsap from "gsap";
 import { motion } from "framer-motion";
 import { useFinePointer, useReducedMotion } from "@/lib/hooks";
-import { money, type Lang, type MenuItem } from "@/lib/content";
+import { money, type MenuItem } from "@/lib/content";
 
 export default function MenuCard({
   item,
-  lang,
   index,
 }: {
   item: MenuItem;
-  lang: Lang;
   index: number;
 }) {
   const fine = useFinePointer();
@@ -43,10 +41,7 @@ export default function MenuCard({
     gsap.to(el, { rotateX: 0, rotateY: 0, duration: 0.9, ease: "expo.out" });
   };
 
-  const alt =
-    lang === "ru"
-      ? `${item.name.ru} — шаурма в разрезе крупным планом`
-      : `${item.name.en} — shawarma in close cross-section`;
+  const alt = `${item.name} — shawarma in close cross-section`;
 
   return (
     <motion.article
@@ -82,14 +77,14 @@ export default function MenuCard({
           <div className="flex items-start justify-between gap-4">
             {/* two lines reserved so every note in the row starts on one line */}
             <h3 className="text-[clamp(0.95rem,1.15vw,1.1rem)] font-bold uppercase leading-[1.15] tracking-[-0.02em] sm:min-h-[2.3em]">
-              {item.name[lang]}
+              {item.name}
             </h3>
             <span className="tnum shrink-0 font-display text-[clamp(0.95rem,1.15vw,1.1rem)] font-bold leading-[1.15]">
               {money(item.price)}
             </span>
           </div>
           <p className="mt-2 text-[0.9rem] leading-[1.45] text-coal/62">
-            {item.note[lang]}
+            {item.note}
           </p>
         </div>
       </div>

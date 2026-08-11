@@ -3,9 +3,9 @@
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { counters, type Lang } from "@/lib/content";
+import { counters } from "@/lib/content";
 
-export default function Counters({ lang }: { lang: Lang }) {
+export default function Counters() {
   const host = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -43,7 +43,7 @@ export default function Counters({ lang }: { lang: Lang }) {
       >
         {counters.map((counter, index) => (
           <div
-            key={counter.label.en}
+            key={counter.label}
             className={
               index > 0
                 ? "border-t border-coal/22 pt-9 sm:border-t-0 sm:border-l sm:pt-0 sm:pl-8"
@@ -53,7 +53,7 @@ export default function Counters({ lang }: { lang: Lang }) {
             <p className="tnum font-display text-[length:var(--text-num)] font-extrabold leading-[0.82] tracking-[-0.05em]">
               <span data-count={counter.value}>{counter.value}</span>
             </p>
-            <p className="label mt-4 text-coal/72">{counter.label[lang]}</p>
+            <p className="label mt-4 text-coal/72">{counter.label}</p>
           </div>
         ))}
       </div>

@@ -1,5 +1,5 @@
 /**
- * Pulls the generated frames and clips into public/media.
+ * Pulls the generated frames into assets/media and the clips into public/media.
  *
  *   node scripts/fetch-media.mjs
  *
@@ -41,7 +41,9 @@ const ASSETS = [
 let failed = 0;
 
 for (const [target, remote] of ASSETS) {
-  const path = join("public", target);
+  const path = target.endsWith(".mp4")
+    ? join("public", target)
+    : join("assets", target);
   try {
     const response = await fetch(`${CDN}/${remote}`);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);

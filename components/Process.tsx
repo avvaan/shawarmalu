@@ -4,7 +4,8 @@ import Image from "next/image";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { steps, ui, type Lang } from "@/lib/content";
+import { steps, ui } from "@/lib/content";
+import imageLoader from "@/lib/imageLoader";
 import { useMotionOK } from "@/lib/hooks";
 
 /**
@@ -12,7 +13,7 @@ import { useMotionOK } from "@/lib/hooks";
  * Touch and reduced-motion: the same four frames on a native snap rail — the
  * cheap analogue, not a cut-down version.
  */
-export default function Process({ lang }: { lang: Lang }) {
+export default function Process() {
   const section = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const bar = useRef<HTMLSpanElement>(null);
@@ -69,10 +70,10 @@ export default function Process({ lang }: { lang: Lang }) {
     >
       <div className="rail flex items-end justify-between gap-6 pt-[clamp(4rem,9vh,7rem)] pb-8 md:pt-0 md:pb-0">
         <h2 className="text-[length:var(--text-h1)] font-extrabold uppercase">
-          {ui.process.heading[lang]}
+          {ui.process.heading}
         </h2>
         <p className="label hidden shrink-0 pb-2 text-bone/60 md:block">
-          {ui.process.hint[lang]}
+          {ui.process.hint}
         </p>
       </div>
 
@@ -89,13 +90,14 @@ export default function Process({ lang }: { lang: Lang }) {
               <div className="relative aspect-3/2 overflow-hidden bg-coal">
                 {step.kind === "video" && rich ? (
                   <video
-                    aria-label={step.title[lang]}
+                    aria-label={step.title}
                     muted
                     loop
                     autoPlay
                     playsInline
                     preload="metadata"
-                    poster={step.poster}
+                    // sources live outside public/, so reach for the built ladder
+                    poster={imageLoader({ src: step.poster!, width: 1440 })}
                     className="h-full w-full object-cover"
                   >
                     <source src={step.media} type="video/mp4" />
@@ -103,7 +105,7 @@ export default function Process({ lang }: { lang: Lang }) {
                 ) : (
                   <Image
                     src={step.kind === "video" ? step.poster! : step.media}
-                    alt={`${step.title[lang]} — ${step.body[lang]}`}
+                    alt={`${step.title} — ${step.body}`}
                     fill
                     loading="lazy"
                     quality={70}
@@ -117,10 +119,10 @@ export default function Process({ lang }: { lang: Lang }) {
               </div>
               <figcaption className="mt-6 max-w-[38ch]">
                 <h3 className="text-[length:var(--text-h3)] font-bold uppercase">
-                  {step.title[lang]}
+                  {step.title}
                 </h3>
                 <p className="mt-2.5 text-[1rem] leading-[1.5] text-bone/62">
-                  {step.body[lang]}
+                  {step.body}
                 </p>
               </figcaption>
             </figure>

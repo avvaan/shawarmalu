@@ -4,7 +4,6 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Magnetic from "@/components/Magnetic";
-import type { Lang } from "@/lib/content";
 import { shop, ui } from "@/lib/content";
 
 const sections = [
@@ -14,10 +13,9 @@ const sections = [
   { href: "#find", key: "find" as const },
 ];
 
-export default function Header({ lang }: { lang: Lang }) {
+export default function Header() {
   const [dense, setDense] = useState(false);
   const [open, setOpen] = useState(false);
-  const other: Lang = lang === "ru" ? "en" : "ru";
 
   useEffect(() => {
     const onScroll = () => setDense(window.scrollY > 32);
@@ -54,7 +52,7 @@ export default function Header({ lang }: { lang: Lang }) {
           }`}
         >
           <Link
-            href={`/${lang}`}
+            href="/"
             className="font-display font-extrabold whitespace-nowrap uppercase leading-none transition-[font-size,letter-spacing] duration-500 ease-out-expo"
             style={{
               fontSize: dense ? "0.95rem" : "1.2rem",
@@ -71,36 +69,20 @@ export default function Header({ lang }: { lang: Lang }) {
                 href={section.href}
                 className="label group relative py-2 text-bone/62 transition-colors duration-300 hover:text-bone"
               >
-                {ui.nav[section.key][lang]}
+                {ui.nav[section.key]}
                 <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-ember transition-[width] duration-[400ms] ease-out-expo group-hover:w-full" />
               </a>
             ))}
           </nav>
 
           <div className="flex items-center gap-4 md:gap-6">
-            <div
-              className="label hidden items-center gap-1.5 text-bone/60 sm:flex"
-              aria-label={ui.footer.langLabel[lang]}
-            >
-              <span aria-current="true" className="text-bone">
-                {lang.toUpperCase()}
-              </span>
-              <span aria-hidden>/</span>
-              <Link
-                href={`/${other}`}
-                className="transition-colors duration-300 hover:text-ember"
-              >
-                {other.toUpperCase()}
-              </Link>
-            </div>
-
             <div className="hidden md:block">
               <Magnetic>
                 <a
                   href="#find"
                   className="label bg-ember px-5 py-3 text-coal transition-colors duration-300 hover:bg-bone"
                 >
-                  {ui.nav.order[lang]}
+                  {ui.nav.order}
                 </a>
               </Magnetic>
             </div>
@@ -112,7 +94,7 @@ export default function Header({ lang }: { lang: Lang }) {
               aria-expanded={open}
               aria-controls="mobile-nav"
             >
-              {ui.nav.menu[lang]}
+              {ui.nav.menu}
               <span aria-hidden className="flex w-5 flex-col gap-[5px]">
                 <span className="h-px w-full bg-bone" />
                 <span className="h-px w-full bg-bone" />
@@ -141,7 +123,7 @@ export default function Header({ lang }: { lang: Lang }) {
                 onClick={() => setOpen(false)}
                 className="label py-2"
               >
-                {lang === "ru" ? "Закрыть" : "Close"}
+                {ui.nav.close}
               </button>
             </div>
 
@@ -160,7 +142,7 @@ export default function Header({ lang }: { lang: Lang }) {
                   }}
                   className="font-display text-[10.5vw] font-extrabold uppercase leading-[0.95] tracking-[-0.04em]"
                 >
-                  {ui.nav[section.key][lang]}
+                  {ui.nav[section.key]}
                 </motion.a>
               ))}
             </nav>
@@ -169,9 +151,7 @@ export default function Header({ lang }: { lang: Lang }) {
               <a href={`tel:${shop.phone}`} className="text-bone/70">
                 {shop.phoneDisplay}
               </a>
-              <Link href={`/${other}`} className="label text-bone/70">
-                {other.toUpperCase()}
-              </Link>
+              <span className="label text-bone/60">{shop.city}</span>
             </div>
           </motion.div>
         )}

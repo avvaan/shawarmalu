@@ -12,7 +12,7 @@ import { readdir, stat, unlink } from "node:fs/promises";
 import { join, extname } from "node:path";
 import sharp from "sharp";
 
-const ROOT = "public/media";
+const ROOT = "assets/media";
 const QUALITY = 82;
 
 /** Sources that are only ever used as a video poster or as the OG card. */
@@ -32,7 +32,7 @@ const kb = (n) => `${(n / 1024).toFixed(0)} KB`;
 
 for (const relative of UNUSED) {
   try {
-    await unlink(join("public/media", relative));
+    await unlink(join("assets/media", relative));
     console.log("drop  ", relative, "(unused)");
   } catch {
     /* already gone */
@@ -56,13 +56,13 @@ for (const source of sources) {
   after += converted;
   console.log(
     "webp  ",
-    target.replace("public/", ""),
+    target,
     `${kb(original)} → ${kb(converted)}`,
   );
 }
 
 // Open Graph wants a small, fixed 1.91:1 card, not the full-resolution frame.
-const ogSource = "public/media/hero-spit.webp";
+const ogSource = "assets/media/hero-spit.webp";
 await sharp(ogSource)
   .resize(1200, 630, { fit: "cover", position: "right" })
   .jpeg({ quality: 84, mozjpeg: true })

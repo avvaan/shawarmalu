@@ -10,15 +10,15 @@
 | Адрес | 1247 N Mills Ave, Orlando, FL 32803 | `shop.street/city/region/postal` |
 | Координаты | 28.5606, −81.3665 | `shop.lat`, `shop.lon` — от них зависит карта |
 | Телефон | (407) 555-0142 — номер из зарезервированного «киношного» диапазона, никуда не звонит | `shop.phone`, `shop.phoneDisplay` |
-| Часы | Пн–Чт 11–23, Пт–Сб 11–02, Вс 12–22 | `openingHours` (schema.org), `ui.hoursRows` (показ), `SCHEDULE` в `components/FindUs.tsx` — **три места, менять все три** |
+| Часы | Mon–Thu 11–23, Fri–Sat 11–02, Sun 12–22 | `openingHours` (schema.org), `ui.hoursRows` (показ), `SCHEDULE` в `components/FindUs.tsx` — **три места, менять все три** |
 | Меню и цены | 8 позиций, $10.90–$16.90 | `menu` |
 | Счётчики | 12 лет / 400 порций / 7 соусов | `counters` |
 | Отзывы | 6 придуманных отзывов с придуманными авторами | `reviews` |
 | Доставка | Uber Eats, DoorDash, 5 миль | `ui.find.deliveryBody` |
 | Соцсети | instagram.com/shawarmalu, tiktok.com/@shawarmalu | `shop.socials` |
-| Домен | https://shawarmalu.vercel.app | `shop.url` — влияет на canonical, OG и schema.org |
+| Домен | https://shawarmalu.onrender.com | `shop.url` — влияет на canonical, OG и schema.org |
 
-## Медиа (`public/media/`) — на месте, заменять не нужно
+## Медиа — на месте, заменять не нужно
 
 Все кадры загружены, сжаты в WebP и подключены. Исходные PNG из Higgsfield
 весили 106.6 МБ, после конвертации — 4.8 МБ, разницы на глаз нет.
@@ -29,8 +29,10 @@
 og.jpg            60 КБ   карточка 1200×630 для Open Graph
 ```
 
-Восстановить папку с нуля: `node scripts/fetch-media.mjs` (заберёт PNG),
-затем `node scripts/optimize-media.mjs` (сожмёт и соберёт `og.jpg`).
+Исходники лежат в `assets/media` и в раздачу не попадают: перед каждой
+сборкой `scripts/build-images.mjs` нарезает из них лестницу ширин в
+`public/img`. Восстановить с нуля: `node scripts/fetch-media.mjs`, затем
+`node scripts/optimize-media.mjs`.
 
 Единственное, что осталось тяжёлым, — два MP4. Здесь их пережать нечем
 (нет ffmpeg); если понадобится, `-crf 30` уронит их примерно вчетверо.
@@ -39,7 +41,7 @@ og.jpg            60 КБ   карточка 1200×630 для Open Graph
 
 - **Карта** тянет тайлы с `basemaps.cartocdn.com`. Бесплатно, без ключа,
   атрибуция OSM + CARTO стоит в углу. В песочнице сборки хост закрыт, поэтому
-  вживую карта здесь ни разу не отрисовывалась — проверьте на превью Vercel.
-- **OG-картинка** — `hero-spit.png` целиком. Если нужен кроп 1200×630,
-  сделайте отдельный файл и поправьте `openGraph.images` в `app/[lang]/layout.tsx`.
+  вживую карта здесь ни разу не отрисовывалась — проверьте на превью Render.
+- **OG-картинка** — `public/og.jpg`, 1200×630, собирается из кадра героя
+  скриптом `optimize-media.mjs`.
 - **favicon** — дефолтный от Next.js.

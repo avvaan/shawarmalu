@@ -4,7 +4,7 @@ import { useSyncExternalStore } from "react";
 import DarkMap from "@/components/DarkMap";
 import Magnetic from "@/components/Magnetic";
 import Reveal from "@/components/Reveal";
-import { shop, ui, type Lang } from "@/lib/content";
+import { shop, ui } from "@/lib/content";
 
 /** Minutes from midnight, per weekday. A close past 1440 spills into the next day. */
 const SCHEDULE: Record<number, { open: number; close: number }> = {
@@ -48,7 +48,7 @@ const subscribeToMinute = (onChange: () => void) => {
   return () => clearInterval(timer);
 };
 
-export default function FindUs({ lang }: { lang: Lang }) {
+export default function FindUs() {
   const minute = useSyncExternalStore(
     subscribeToMinute,
     () => Math.floor(Date.now() / 60_000),
@@ -66,7 +66,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
         <div className="grid gap-x-[clamp(1.5rem,4vw,4rem)] gap-y-12 lg:grid-cols-12">
           <div className="lg:col-span-5">
             <h2 className="text-[length:var(--text-h1)] font-extrabold uppercase">
-              {ui.find.heading[lang]}
+              {ui.find.heading}
             </h2>
 
             {now && (
@@ -77,13 +77,13 @@ export default function FindUs({ lang }: { lang: Lang }) {
                     now.open ? "bg-ember" : "bg-bone/35"
                   }`}
                 />
-                {now.open ? ui.find.openNow[lang] : ui.find.closedNow[lang]}
+                {now.open ? ui.find.openNow : ui.find.closedNow}
               </p>
             )}
 
             <Reveal className="mt-10 flex flex-col" stagger={0.08} y={20}>
               <div className="border-t border-bone/14 py-6">
-                <h3 className="label text-bone/60">{ui.find.address[lang]}</h3>
+                <h3 className="label text-bone/60">{ui.find.address}</h3>
                 <address className="mt-3 text-[1.125rem] leading-[1.45] not-italic">
                   {shop.street}
                   <br />
@@ -92,9 +92,9 @@ export default function FindUs({ lang }: { lang: Lang }) {
               </div>
 
               <div className="border-t border-bone/14 py-6">
-                <h3 className="label text-bone/60">{ui.find.hours[lang]}</h3>
+                <h3 className="label text-bone/60">{ui.find.hours}</h3>
                 <dl className="mt-3 flex flex-col gap-2">
-                  {ui.hoursRows[lang].map((row) => {
+                  {ui.hoursRows.map((row) => {
                     const isToday = !!now && row.index.includes(now.day);
                     return (
                       <div
@@ -111,7 +111,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
                           {row.time}
                           {isToday && (
                             <span className="label text-ember">
-                              {ui.find.today[lang]}
+                              {ui.find.today}
                             </span>
                           )}
                         </dd>
@@ -122,7 +122,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
               </div>
 
               <div className="border-t border-bone/14 py-6">
-                <h3 className="label text-bone/60">{ui.find.phone[lang]}</h3>
+                <h3 className="label text-bone/60">{ui.find.phone}</h3>
                 <a
                   href={`tel:${shop.phone}`}
                   className="tnum mt-3 inline-block text-[1.125rem] transition-colors duration-300 hover:text-ember"
@@ -132,9 +132,9 @@ export default function FindUs({ lang }: { lang: Lang }) {
               </div>
 
               <div className="border-y border-bone/14 py-6">
-                <h3 className="label text-bone/60">{ui.find.delivery[lang]}</h3>
+                <h3 className="label text-bone/60">{ui.find.delivery}</h3>
                 <p className="measure mt-3 leading-[1.55] text-bone/72">
-                  {ui.find.deliveryBody[lang]}
+                  {ui.find.deliveryBody}
                 </p>
               </div>
 
@@ -146,7 +146,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
                     rel="noopener noreferrer"
                     className="label bg-ember px-6 py-4 text-coal transition-colors duration-300 hover:bg-bone"
                   >
-                    {ui.find.directions[lang]}
+                    {ui.find.directions}
                   </a>
                 </Magnetic>
                 <Magnetic>
@@ -154,7 +154,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
                     href={`tel:${shop.phone}`}
                     className="label border border-bone/25 px-6 py-4 transition-colors duration-300 hover:border-bone hover:bg-bone hover:text-coal"
                   >
-                    {ui.find.call[lang]}
+                    {ui.find.call}
                   </a>
                 </Magnetic>
               </div>
@@ -162,7 +162,7 @@ export default function FindUs({ lang }: { lang: Lang }) {
           </div>
 
           <div className="h-[380px] sm:h-[480px] lg:col-span-7 lg:h-auto lg:min-h-[560px]">
-            <DarkMap label={ui.find.mapAlt[lang]} />
+            <DarkMap label={ui.find.mapAlt} />
           </div>
         </div>
       </div>

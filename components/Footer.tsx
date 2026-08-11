@@ -1,9 +1,7 @@
-import Link from "next/link";
 import Magnetic from "@/components/Magnetic";
-import { shop, ui, type Lang } from "@/lib/content";
+import { shop, ui } from "@/lib/content";
 
-export default function Footer({ lang }: { lang: Lang }) {
-  const other: Lang = lang === "ru" ? "en" : "ru";
+export default function Footer() {
 
   return (
     <footer className="relative overflow-hidden bg-coal pt-[clamp(3rem,7vh,5rem)]">
@@ -43,7 +41,7 @@ export default function Footer({ lang }: { lang: Lang }) {
                 strokeWidth="1.6"
               />
             </svg>
-            {ui.footer.top[lang]}
+            {ui.footer.top}
           </a>
         </Magnetic>
       </div>
@@ -73,22 +71,10 @@ export default function Footer({ lang }: { lang: Lang }) {
 
       <div className="rail flex flex-wrap items-center justify-between gap-x-8 gap-y-3 border-t border-bone/14 py-6 text-[0.8125rem] text-bone/60">
         <p>
-          © {new Date().getFullYear()} {shop.name}. {ui.footer.rights[lang]}.
+          © {new Date().getFullYear()} {shop.name}. {ui.footer.rights}.
         </p>
         <p className="tnum">
           {shop.street}, {shop.city}, {shop.region} · {shop.phoneDisplay}
-        </p>
-        <p className="label">
-          <span className="text-bone/70">{lang.toUpperCase()}</span>
-          <span aria-hidden className="px-1.5">
-            /
-          </span>
-          <Link
-            href={`/${other}`}
-            className="transition-colors duration-300 hover:text-ember"
-          >
-            {other.toUpperCase()}
-          </Link>
         </p>
       </div>
     </footer>

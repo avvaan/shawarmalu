@@ -4,12 +4,12 @@ import { useMemo, useState } from "react";
 import { AnimatePresence, MotionConfig } from "framer-motion";
 import MenuCard from "@/components/MenuCard";
 import Reveal from "@/components/Reveal";
-import { menu, ui, type Lang } from "@/lib/content";
+import { menu, ui } from "@/lib/content";
 
 const FILTERS = ["all", "meat", "spicy", "veg"] as const;
 type Filter = (typeof FILTERS)[number];
 
-export default function Menu({ lang }: { lang: Lang }) {
+export default function Menu() {
   const [filter, setFilter] = useState<Filter>("all");
 
   const shown = useMemo(
@@ -25,10 +25,10 @@ export default function Menu({ lang }: { lang: Lang }) {
       <div className="rail py-[clamp(4rem,9vh,8rem)]">
         <Reveal className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <h2 className="text-[length:var(--text-h1)] font-extrabold uppercase">
-            {ui.menu.heading[lang]}
+            {ui.menu.heading}
           </h2>
           <p className="max-w-[30ch] text-[1.0625rem] leading-[1.5] text-coal/65 md:text-right">
-            {ui.menu.sub[lang]}
+            {ui.menu.sub}
           </p>
         </Reveal>
 
@@ -48,14 +48,14 @@ export default function Menu({ lang }: { lang: Lang }) {
                       : "border border-coal/22 text-coal/70 hover:border-coal hover:text-coal"
                   }`}
                 >
-                  {ui.menu.filters[key][lang]}
+                  {ui.menu.filters[key]}
                 </button>
               );
             })}
           </div>
 
           <p className="label tnum text-coal/62" aria-live="polite">
-            {shown.length} {ui.menu.count[lang]}
+            {shown.length} {ui.menu.count}
           </p>
         </div>
 
@@ -66,7 +66,6 @@ export default function Menu({ lang }: { lang: Lang }) {
                 <MenuCard
                   key={item.id}
                   item={item}
-                  lang={lang}
                   index={index}
                 />
               ))}

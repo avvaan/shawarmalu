@@ -5,9 +5,9 @@ import { useEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import Reveal from "@/components/Reveal";
-import { ui, type Lang } from "@/lib/content";
+import { ui } from "@/lib/content";
 
-export default function About({ lang }: { lang: Lang }) {
+export default function About() {
   const frame = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -55,7 +55,7 @@ export default function About({ lang }: { lang: Lang }) {
         >
           <Image
             src="/media/counter.webp"
-            alt={ui.about.imageAlt[lang]}
+            alt={ui.about.imageAlt}
             fill
             loading="lazy"
             quality={70}
@@ -66,7 +66,7 @@ export default function About({ lang }: { lang: Lang }) {
 
         <div className="mt-12 grid gap-x-[clamp(1.5rem,4vw,4rem)] gap-y-8 lg:grid-cols-12">
           <h2 className="text-[length:var(--text-h1)] font-extrabold uppercase lg:col-span-4">
-            {ui.about.heading[lang]}
+            {ui.about.heading}
           </h2>
 
           <Reveal
@@ -74,7 +74,7 @@ export default function About({ lang }: { lang: Lang }) {
             stagger={0.12}
             y={22}
           >
-            {ui.about.body[lang].map((paragraph, index) => (
+            {ui.about.body.map((paragraph, index) => (
               <p
                 key={index}
                 className={`break-inside-avoid ${index > 0 ? "lg:mt-5" : ""} ${

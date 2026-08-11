@@ -1,16 +1,16 @@
 import Reveal from "@/components/Reveal";
-import { reviews, ui, type Lang } from "@/lib/content";
+import { reviews, ui } from "@/lib/content";
 
 /** Two of the six are printed on paper — the wall behind the till, not a carousel. */
 const PAPER = new Set([1, 4]);
 const LOUD = new Set([0, 3]);
 
-export default function Reviews({ lang }: { lang: Lang }) {
+export default function Reviews() {
   return (
     <section className="bg-coal">
       <div className="rail py-[clamp(4rem,9vh,8rem)]">
         <h2 className="text-[length:var(--text-h1)] font-extrabold uppercase">
-          {ui.reviews.heading[lang]}
+          {ui.reviews.heading}
         </h2>
 
         <Reveal
@@ -36,7 +36,7 @@ export default function Reviews({ lang }: { lang: Lang }) {
                       : "text-[1.0625rem] leading-[1.55]"
                   } ${onPaper ? "text-coal" : "text-bone/88"}`}
                 >
-                  {review.text[lang]}
+                  {review.text}
                 </blockquote>
                 <figcaption
                   className={`mt-6 flex items-center gap-2.5 label ${
@@ -52,7 +52,7 @@ export default function Reviews({ lang }: { lang: Lang }) {
                       onPaper ? "bg-coal/35" : "bg-bone/30"
                     }`}
                   />
-                  <span>{review.source[lang]}</span>
+                  <span>{review.source}</span>
                 </figcaption>
               </figure>
             );

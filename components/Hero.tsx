@@ -4,12 +4,11 @@ import Image from "next/image";
 import { useState } from "react";
 import Magnetic from "@/components/Magnetic";
 import { useMotionOK } from "@/lib/hooks";
-import type { Lang } from "@/lib/content";
 import { ui } from "@/lib/content";
 
 const WORDMARK = ["SHAWARMA", "LU"];
 
-export default function Hero({ lang }: { lang: Lang }) {
+export default function Hero() {
   const { rich } = useMotionOK();
   const [videoReady, setVideoReady] = useState(false);
   let charIndex = 0;
@@ -20,7 +19,7 @@ export default function Hero({ lang }: { lang: Lang }) {
           video so a blocked or slow file never leaves a black screen. */}
       <Image
         src="/media/hero-spit.webp"
-        alt={ui.hero.videoAlt[lang]}
+        alt={ui.hero.videoAlt}
         fill
         preload
         quality={70}
@@ -88,7 +87,7 @@ export default function Hero({ lang }: { lang: Lang }) {
 
         <div className="mt-8 flex flex-col gap-7 sm:flex-row sm:items-end sm:justify-between">
           <p className="max-w-[26ch] text-[clamp(1.05rem,1.5vw,1.375rem)] leading-[1.45] text-bone/78">
-            {ui.hero.line[lang]}
+            {ui.hero.line}
           </p>
 
           <Magnetic>
@@ -96,7 +95,7 @@ export default function Hero({ lang }: { lang: Lang }) {
               href="#menu"
               className="label group flex items-center gap-3 bg-ember px-7 py-4 text-coal transition-colors duration-300 hover:bg-bone"
             >
-              {ui.hero.cta[lang]}
+              {ui.hero.cta}
               <svg
                 width="16"
                 height="10"
@@ -124,7 +123,7 @@ export default function Hero({ lang }: { lang: Lang }) {
           className="label text-bone/60"
           style={{ writingMode: "vertical-rl" }}
         >
-          {ui.hero.scroll[lang]}
+          {ui.hero.scroll}
         </span>
         <span className="relative block h-16 w-px overflow-hidden bg-bone/20">
           <span className="cue-run absolute inset-x-0 top-0 h-1/2 bg-ember" />
