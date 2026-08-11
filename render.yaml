@@ -1,0 +1,23 @@
+# Render blueprint. New → Blueprint → point it at this repository, or set the
+# same four fields by hand in a Web Service.
+#
+# This has to be a Web Service, not a Static Site: the page relies on Next's
+# image optimizer and on the / → /ru redirect, and neither survives a static
+# export.
+services:
+  - type: web
+    name: shawarmalu
+    runtime: node
+    plan: free
+    region: oregon
+    branch: main
+    # --include=dev is not optional: Render sets NODE_ENV=production, and a bare
+    # npm ci would then skip typescript and tailwind and fail the build
+    buildCommand: npm ci --include=dev && npm run build
+    startCommand: npm start
+    # / answers 307 to /ru, so point the health check at a real page
+    healthCheckPath: /ru
+    envVars:
+      - key: NODE_VERSION
+        value: "22.22.2"
+    # next start reads PORT, which Render sets. Nothing else to configure.
