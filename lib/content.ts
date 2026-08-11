@@ -193,7 +193,8 @@ export const steps: Step[] = [
       en: "Layer on layer, eight hours over coals. Only the outer edge comes off.",
     },
     media: "/media/slicing.mp4",
-    poster: "/media/process/2-spit.png",
+    // the clip opens on this exact frame — a different poster flashes on load
+    poster: "/media/slicing.png",
     kind: "video",
     width: 2528,
     height: 1696,

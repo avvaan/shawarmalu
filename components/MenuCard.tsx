@@ -80,7 +80,8 @@ export default function MenuCard({
 
         <div className="min-w-0 flex-1 sm:mt-5">
           <div className="flex items-start justify-between gap-4">
-            <h3 className="text-[clamp(0.95rem,1.15vw,1.1rem)] font-bold uppercase leading-[1.15] tracking-[-0.02em]">
+            {/* two lines reserved so every note in the row starts on one line */}
+            <h3 className="text-[clamp(0.95rem,1.15vw,1.1rem)] font-bold uppercase leading-[1.15] tracking-[-0.02em] sm:min-h-[2.3em]">
               {item.name[lang]}
             </h3>
             <span className="tnum shrink-0 font-display text-[clamp(0.95rem,1.15vw,1.1rem)] font-bold leading-[1.15]">

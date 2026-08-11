@@ -10,9 +10,15 @@ Tailwind v4, GSAP/ScrollTrigger, Framer Motion, Lenis. Бэкенда нет.
 
 ```bash
 npm install
-node scripts/fetch-media.mjs   # положит настоящие кадры в public/media
 npm run dev                    # http://localhost:3000 → /ru
 ```
+
+Медиа лежит в `public/media` и уже в репозитории. Восстановить папку с нуля —
+`node scripts/fetch-media.mjs` (нужен доступ к CDN Higgsfield).
+
+Если правите файлы в `public/media`, чистите кэш оптимизатора:
+`rm -rf .next/dev/cache/images` и перезапускайте dev-сервер — иначе он будет
+отдавать старые версии по тем же путям.
 
 ## Как устроено
 

@@ -25,7 +25,8 @@ export default function Hero({ lang }: { lang: Lang }) {
         preload
         quality={70}
         sizes="100vw"
-        className="object-cover object-[70%_center]"
+        // portrait crops this 16:9 frame hard; pan left so the type keeps its dark ground
+        className="object-cover object-[66%_center] md:object-[70%_center]"
       />
 
       {rich && (
@@ -45,13 +46,15 @@ export default function Hero({ lang }: { lang: Lang }) {
         </video>
       )}
 
+      {/* Two shallow scrims that multiply into a dark corner under the type and
+          let go of the spit. Deepen these and the photograph disappears. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-coal)_4%,color-mix(in_oklab,var(--color-coal)_72%,transparent)_36%,transparent_72%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_top,var(--color-coal)_0%,color-mix(in_oklab,var(--color-coal)_80%,transparent)_30%,transparent_80%)] md:bg-[linear-gradient(to_top,var(--color-coal)_0%,color-mix(in_oklab,var(--color-coal)_62%,transparent)_26%,transparent_64%)]"
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-[linear-gradient(to_right,var(--color-coal)_0%,color-mix(in_oklab,var(--color-coal)_55%,transparent)_38%,transparent_66%)]"
+        className="absolute inset-0 bg-[linear-gradient(to_right,color-mix(in_oklab,var(--color-coal)_88%,transparent)_0%,color-mix(in_oklab,var(--color-coal)_38%,transparent)_30%,transparent_58%)]"
       />
       <div aria-hidden className="soot-layer" />
 
