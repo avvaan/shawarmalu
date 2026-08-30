@@ -76,6 +76,18 @@ export default function Footer() {
         <p className="tnum">
           {shop.street}, {shop.city}, {shop.region} · {shop.phoneDisplay}
         </p>
+        <p>
+          {ui.footer.builtBy}{" "}
+          <a
+            href={ui.footer.builtByHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group relative inline-block text-bone/80 transition-colors duration-300 hover:text-bone"
+          >
+            {ui.footer.builtByName}
+            <span className="absolute -bottom-0.5 left-0 h-px w-0 bg-ember transition-[width] duration-[400ms] ease-out-expo group-hover:w-full" />
+          </a>
+        </p>
       </div>
     </footer>
   );

@@ -274,6 +274,9 @@ export const ui = {
   footer: {
     top: "Back to top",
     rights: "All rights reserved",
+    builtBy: "Site by",
+    builtByName: "CitrusTack",
+    builtByHref: "https://citrustack.com",
   },
   hoursRows: [
     { days: "Mon — Thu", time: "11am — 11pm", index: [1, 2, 3, 4] },
